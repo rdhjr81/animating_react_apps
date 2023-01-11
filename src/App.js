@@ -4,7 +4,7 @@ import "./App.css";
 import Modal from "./components/Modal/Modal";
 import Backdrop from "./components/Backdrop/Backdrop";
 import List from "./components/List/List";
-import { Transition } from "react-transition-group/Transition";
+import { Transition } from "react-transition-group";
 
 class App extends Component {
   state = {
@@ -19,6 +19,7 @@ class App extends Component {
   closeModal = () => {
     this.setState({ modalIsOpen: false });
   };
+
   render() {
     return (
       <div className="App">
@@ -32,16 +33,20 @@ class App extends Component {
           Toggle
         </button>
         <br />
-        {this.state.showBlock ? (
-          <div
-            style={{
-              backgroundColor: "red",
-              width: 100,
-              height: 100,
-              margin: "auto",
-            }}
-          ></div>
-        ) : null}
+        <Transition in={this.state.showBlock} timeout={300} mountOnEnter unmountOnExit>
+          {(state) => (
+            <div
+              style={{
+                backgroundColor: "red",
+                width: 100,
+                height: 100,
+                margin: "auto",
+                opacity: state === 'exiting' ? 0: 1,
+                transition: 'opacity 1s ease-out'
+              }}
+            ></div>
+          )}
+        </Transition>
 
         {this.state.modalIsOpen ? <Modal closed={this.closeModal} /> : null}
         {this.state.modalIsOpen ? <Backdrop /> : null}
