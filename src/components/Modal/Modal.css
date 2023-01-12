@@ -50,3 +50,20 @@
         transform: translateY(-100%);
     }
 }
+
+.fade-slide-enter{
+    /*
+    used to initialize 
+    */
+}
+.fade-slide-enter-active{
+    animation: openModal 0.4s ease-out forwards;
+}
+.fade-slide-exit{
+    /*
+    used to initialize 
+    */
+}
+.fade-slide-exit-active{
+    animation: closeModal 1s ease-out forwards;
+}
